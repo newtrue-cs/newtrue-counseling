@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴트루 (NEW TRUE) | 청년 마음건강 · 자기이해 · 성장</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f2f8f6',
+                            100: '#e1f0ec',
+                            200: '#c5e2da',
+                            300: '#9ccdc0',
+                            400: '#6eb0a1',
+                            500: '#4f9486',
+                            600: '#3d776c',
+                            700: '#346058',
+                            800: '#2d4f49',
+                            900: '#28433f',
+                            dark: '#1e3330',
+                        },
+                        warmBg: '#FAF8F5',
+                        warmCard: '#F5F1EB',
+                        goldAccent: '#D4A359',
+                        slateText: '#2D3748'
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Serif KR & Outfit for accent design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #FAF8F5;
+            color: #2D3748;
+            scroll-behavior: smooth;
+        }
+        .serif-title {
+            font-family: 'Noto Serif KR', serif;
+        }
+        .brand-font {
+            font-family: 'Outfit', sans-serif;
+        }
+        /* Custom Smooth Shadows & Glassmorphism */
+        .glass-header {
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 30px -5px rgba(79, 148, 134, 0.08);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -10px rgba(79, 148, 134, 0.15);
+        }
+        /* Arch Shape Custom Style */
+        .arch-clip {
+            border-top-left-radius: 120px;
+            border-top-right-radius: 120px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-200 selection:text-brand-900">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-brand-100/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- SVG Icon mimicking the Brand Arch & Star Logo Concept -->
+                <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white shadow-md group-hover:bg-brand-600 transition">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <!-- Arch Frame -->
+                        <path d="M12 2C7.58 2 4 5.58 4 10v9a1 1 0 001 1h14a1 1 0 001-1v-9c0-4.42-3.58-8-8-8zm6 16H6v-8c0-3.31 2.69-6 6-6s6 2.69 6 6v8z" opacity="0.4"/>
+                        <!-- Central Star / Light -->
+                        <path d="M12 6l1.2 2.8L16 10l-2.8 1.2L12 14l-1.2-2.8L8 10l2.8-1.2z" fill="#D4A359"/>
+                        <!-- Path / Leaf Growth -->
+                        <path d="M8 18c2-3 4-4 8-2 0 0-3-5-7-2s-1 4-1 4z"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="brand-font text-xl font-bold tracking-wider text-brand-900 block leading-none">NEW TRUE</span>
+                    <span class="text-[10px] text-brand-600 tracking-widest font-medium mt-0.5 block">심리상담센터</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-700">
+                <a href="#about" class="hover:text-brand-600 transition">소개</a>
+                <a href="#programs" class="hover:text-brand-600 transition">상담 프로그램</a>
+                <a href="#tests" class="hover:text-brand-600 transition">검사 및 도구</a>
+                <a href="#self-check" class="hover:text-brand-600 transition">자가 진단</a>
+                <a href="#counselors" class="hover:text-brand-600 transition">상담진</a>
+                <a href="#reviews" class="hover:text-brand-600 transition">후기 및 사례</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden sm:flex items-center gap-3">
+                <button onclick="openBookingModal()" class="bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm hover:shadow transition flex items-center gap-2">
+                    <i class="fa-regular font-bold fa-calendar-check"></i>
+                    <span>상담 예약하기</span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 p-2 rounded-lg hover:bg-brand-50">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-warmBg border-b border-brand-100 px-6 py-4 space-y-3">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-700 py-1 font-medium">소개</a>
+            <a href="#programs" onclick="toggleMobileMenu()" class="block text-slate-700 py-1 font-medium">상담 프로그램</a>
+            <a href="#tests" onclick="toggleMobileMenu()" class="block text-slate-700 py-1 font-medium">검사 및 도구</a>
+            <a href="#self-check" onclick="toggleMobileMenu()" class="block text-slate-700 py-1 font-medium">자가 진단</a>
+            <a href="#counselors" onclick="toggleMobileMenu()" class="block text-slate-700 py-1 font-medium">상담진</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block text-slate-700 py-1 font-medium">후기 및 사례</a>
+            <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full bg-brand-500 text-white font-semibold py-2.5 rounded-xl text-center shadow-sm">
+                상담 예약하기
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-20">
+
+        <!-- 1. HERO SECTION -->
+        <section class="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 overflow-hidden">
+            <!-- Background Decorative Elements -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-100/50 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-orange-100/40 rounded-full blur-2xl -z-10"></div>
+
+            <div class="max-w-5xl mx-auto text-center space-y-8">
+                
+                <!-- Arch Symbol Graphic Representation -->
+                <div class="inline-flex flex-col items-center justify-center mb-2">
+                    <div class="w-20 h-28 arch-clip border-2 border-brand-400/80 bg-brand-50/60 flex flex-col items-center justify-between p-3 relative shadow-inner">
+                        <i class="fa-solid fa-sparkles text-goldAccent text-lg mt-2 animate-pulse"></i>
+                        <i class="fa-solid fa-seedling text-brand-600 text-xl mb-1"></i>
+                    </div>
+                </div>
+
+                <!-- Subhead Label -->
+                <div class="inline-block px-4 py-1.5 bg-brand-100/70 border border-brand-200 rounded-full text-brand-800 text-xs sm:text-sm font-semibold tracking-wide">
+                    청년 마음건강 · 자기이해 · 성장 중심 상담
+                </div>
+
+                <!-- Main Catchphrase -->
+                <h1 class="serif-title text-3xl sm:text-5xl lg:text-6xl font-bold text-brand-900 leading-tight">
+                    타인의 기준에서 벗어나,<br class="hidden sm:inline">
+                    <span class="text-brand-500">진짜 나</span>를 만나는 시간.
+                </h1>
+
+                <!-- Body Subtitle -->
+                <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                    다른 사람이 원하는 내가 아니라, 내 안의 목소리에 귀 기울입니다.<br class="hidden sm:inline">
+                    <strong class="text-brand-800 font-semibold">뉴트루(NEW TRUE)</strong>에서 나다운 삶을 위한 단단한 뿌리를 내리세요.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-brand-500/20 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                        <span>1:1 상담 신청하기</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                    <a href="#self-check" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium px-8 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-compass text-brand-500"></i>
+                        <span>내 마음 자가진단 해보기</span>
+                    </a>
+                </div>
+
+                <!-- Social Proof Badges -->
+                <div class="pt-10 flex flex-wrap justify-center items-center gap-6 sm:gap-12 text-xs sm:text-sm text-slate-500 font-medium border-t border-slate-200/60 max-w-3xl mx-auto">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-check text-brand-500"></i>
+                        <span>공인 자격 상담 전문가</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-heart text-brand-500"></i>
+                        <span>100% 철저한 비밀 보장</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-hands-holding-child text-brand-500"></i>
+                        <span>청년 맞춤 심리 검사</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 2. BRAND CONCEPT & CORE VALUES -->
+        <section id="about" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-500 font-bold text-sm tracking-widest uppercase">Brand Core Value</span>
+                    <h2 class="serif-title text-3xl sm:text-4xl font-bold text-brand-900 mt-2">
+                        "나를 새롭게, 나답게."
+                    </h2>
+                    <p class="text-slate-600 mt-4 text-base sm:text-lg">
+                        뉴트루는 청년들이 사회적 기대나 타인의 시선에서 벗어나,<br class="hidden sm:inline">
+                        자신의 본래 모습(TRUE)을 새로이(NEW) 발견하도록 돕는 안전한 공간입니다.
+                    </p>
+                </div>
+
+                <!-- 3 Pillars Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Pillar 1 -->
+                    <div class="bg-warmBg rounded-2xl p-8 border border-brand-100 card-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+                            <h3 class="serif-title text-xl font-bold text-brand-900 mb-3">01. 마음건강</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                                학업, 취업, 대인관계로 지친 청년의 번아웃과 불안을 수용합니다. 감정을 있는 그대로 마주하고 다스리는 안전한 안식처가 되어드립니다.
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-brand-200/50 text-xs text-brand-700 font-medium">
+                            #안전한 공간 #감정 조율 #심리적 안정
+                        </div>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="bg-warmBg rounded-2xl p-8 border border-brand-100 card-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            </div>
+                            <h3 class="serif-title text-xl font-bold text-brand-900 mb-3">02. 자기이해</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                                투사검사, 도형심리, 에니어그램 등 객관적이고 깊이 있는 도구로 내면의 신념과 무의식적 기제를 탐색하여 나만의 정체성을 세웁니다.
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-brand-200/50 text-xs text-brand-700 font-medium">
+                            #성격유형 #투사검사 #본래의 나
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="bg-warmBg rounded-2xl p-8 border border-brand-100 card-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-tree"></i>
+                            </div>
+                            <h3 class="serif-title text-xl font-bold text-brand-900 mb-3">03. 지속적 성장</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                                단순한 위로에 그치지 않고, 일상에서 실행할 수 있는 실천적 솔루션과 테라피 워크북을 통해 스스로 삶의 주인으로 주체적으로 도약하도록 돕습니다.
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-brand-200/50 text-xs text-brand-700 font-medium">
+                            #지속적 변화 #주체적 삶 #실천 워크북
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 3. COUNSELING PROGRAMS SECTION -->
+        <section id="programs" class="py-20 bg-warmBg border-t border-brand-100/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <span class="text-brand-500 font-bold text-sm tracking-widest uppercase">Programs</span>
+                        <h2 class="serif-title text-3xl sm:text-4xl font-bold text-brand-900 mt-2">
+                            뉴트루 맞춤 프로그램
+                        </h2>
+                    </div>
+                    <p class="text-slate-600 mt-2 md:mt-0 max-w-md text-sm sm:text-base">
+                        현재 나의 상황과 고민의 깊이에 맞는 최적의 심리 솔루션을 제공합니다.
+                    </p>
+                </div>
+
+                <!-- Interactive Tab Buttons -->
+                <div class="flex flex-wrap gap-2 mb-8 border-b border-slate-200 pb-4">
+                    <button onclick="filterPrograms('all')" id="tab-all" class="program-tab active px-5 py-2.5 rounded-full text-sm font-semibold transition bg-brand-500 text-white">전체 보기</button>
+                    <button onclick="filterPrograms('individual')" id="tab-individual" class="program-tab px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-brand-50">1:1 개인상담</button>
+                    <button onclick="filterPrograms('test')" id="tab-test" class="program-tab px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-brand-50">심리검사 & 분석</button>
+                    <button onclick="filterPrograms('group')" id="tab-group" class="program-tab px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-slate-600 border border-slate-200 hover:bg-brand-50">그룹 & 테라피 워크숍</button>
+                </div>
+
+                <!-- Program Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1 -->
+                    <div class="program-card individual bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="px-3 py-1 bg-brand-50 text-brand-700 text-xs font-semibold rounded-md">1:1 맞춤</span>
+                                <span class="text-slate-400 text-xs">회당 50분</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">청년 맞춤 심리상담</h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                                우울, 불안, 진로 스트레스, 대인관계 갈등 등 지금 겪는 심리적 어려움의 원인을 다각도로 다루며 회복을 돕습니다.
+                            </p>
+                            <ul class="text-xs text-slate-500 space-y-2 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 감정 조절 및 스트레스 관리</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 대인관계 양식 점검 및 개선</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 나다운 자아존중감 형성</li>
+                            </ul>
+                        </div>
+                        <button onclick="openBookingModal('1:1 청년 맞춤 심리상담')" class="w-full py-2.5 bg-brand-50 text-brand-700 hover:bg-brand-500 hover:text-white font-medium rounded-xl text-sm transition">
+                            상담 문의하기
+                        </button>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="program-card test bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="px-3 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-md">검사 & 디브리핑</span>
+                                <span class="text-slate-400 text-xs">검사 + 해석 60분</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">자기이해 종합 검사 패키지</h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                                에니어그램, HTP/PITR 투사검사, 도형심리검사를 결합하여 나의 무의식과 본연의 성격 기제를 선명하게 시각화합니다.
+                            </p>
+                            <ul class="text-xs text-slate-500 space-y-2 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 성격 유형 및 대처 방식 다이어그램</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 그림 및 문장완성 투사검사 해석</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 나만의 맞춤 프로파일 보고서 제공</li>
+                            </ul>
+                        </div>
+                        <button onclick="openBookingModal('자기이해 종합 검사 패키지')" class="w-full py-2.5 bg-brand-50 text-brand-700 hover:bg-brand-500 hover:text-white font-medium rounded-xl text-sm transition">
+                            검사 신청하기
+                        </button>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="program-card group bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-md">소모임 워크숍</span>
+                                <span class="text-slate-400 text-xs">주 1회 /총 4주</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">리플렉션 테라피 모임</h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                                소수 정예 청년들과 함께 필사, 감정 일기 작성, 리플렉션 워크북 공유를 통해 느슨하지만 깊은 연결감을 경험합니다.
+                            </p>
+                            <ul class="text-xs text-slate-500 space-y-2 mb-6">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 매일 10분 셀프 리플렉션 키트</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 따뜻하고 안전한 수용적 소통</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> 4주 성찰 핸드북 지급</li>
+                            </ul>
+                        </div>
+                        <button onclick="openBookingModal('리플렉션 테라피 모임')" class="w-full py-2.5 bg-brand-50 text-brand-700 hover:bg-brand-500 hover:text-white font-medium rounded-xl text-sm transition">
+                            워크숍 참여하기
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 4. INTERACTIVE SELF-CHECK WIDGET -->
+        <section id="self-check" class="py-20 bg-brand-900 text-white relative overflow-hidden">
+            <!-- Decorative Glow Background -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-10">
+                    <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Self Analysis</span>
+                    <h2 class="serif-title text-2xl sm:text-4xl font-bold mt-2">
+                        지금 내 마음의 날씨는 어떤가요?
+                    </h2>
+                    <p class="text-brand-200 text-sm sm:text-base mt-2">
+                        간단한 3가지 질문을 통해 현재 나의 심리적 상태를 살짝 들여다보세요.
+                    </p>
+                </div>
+
+                <!-- Self Quiz Container -->
+                <div class="bg-brand-800/80 border border-brand-700/60 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+                    
+                    <div id="quiz-step-container">
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-brand-900 h-2 rounded-full mb-8 overflow-hidden">
+                            <div id="quiz-progress" class="bg-amber-400 h-full w-1/3 transition-all duration-300"></div>
+                        </div>
+
+                        <!-- Question Display -->
+                        <div id="quiz-question-box" class="min-h-[220px] flex flex-col justify-between">
+                            <!-- Question Text will be injected via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Quiz Result Box (Hidden by default) -->
+                    <div id="quiz-result-box" class="hidden text-center space-y-6 py-4">
+                        <div class="w-16 h-16 bg-amber-400/20 text-amber-400 rounded-full flex items-center justify-center text-3xl mx-auto">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <h3 id="result-title" class="serif-title text-2xl font-bold text-white"></h3>
+                        <p id="result-desc" class="text-brand-100 text-sm sm:text-base leading-relaxed max-w-xl mx-auto"></p>
+                        
+                        <div class="p-4 bg-brand-900/60 border border-brand-700 rounded-2xl text-left max-w-md mx-auto">
+                            <span class="text-xs text-amber-400 font-bold block mb-1">뉴트루 추천 솔루션</span>
+                            <span id="result-recommendation" class="text-sm font-semibold text-white"></span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-center gap-3 pt-4">
+                            <button onclick="openBookingModal('자가진단 후 상담 신청')" class="bg-amber-400 hover:bg-amber-300 text-brand-900 font-bold px-6 py-3 rounded-xl transition text-sm">
+                                추천 프로그램 예약하기
+                            </button>
+                            <button onclick="resetQuiz()" class="bg-transparent hover:bg-brand-700 text-brand-200 border border-brand-600 px-6 py-3 rounded-xl transition text-sm">
+                                다시 테스트하기
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 5. COUNSELOR & PHILOSOPHY SECTION -->
+        <section id="counselors" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Left: Graphic / Image Card -->
+                    <div class="relative">
+                        <div class="w-full h-[450px] bg-warmCard rounded-3xl overflow-hidden relative border border-brand-100 flex items-center justify-center p-8">
+                            <!-- Stylized Aesthetic Frame -->
+                            <div class="absolute inset-4 border border-brand-300/40 rounded-2xl pointer-events-none"></div>
+                            
+                            <div class="text-center space-y-4 max-w-md z-10">
+                                <div class="w-16 h-16 bg-brand-500 text-white rounded-full flex items-center justify-center text-2xl mx-auto shadow-md">
+                                    <i class="fa-solid fa-quote-left"></i>
+                                </div>
+                                <blockquote class="serif-title text-xl font-medium text-brand-900 leading-relaxed">
+                                    "상담은 문제를 고쳐주는 과정이 아니라, 당신이 이미 가지고 있는 자생력을 되찾도록 곁에 서 있는 시간입니다."
+                                </blockquote>
+                                <p class="text-xs text-brand-700 font-semibold tracking-wider uppercase">
+                                    NEW TRUE COUNSELING PHILOSOPHY
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Stat Badge -->
+                        <div class="absolute -bottom-6 -right-2 sm:right-6 bg-white p-5 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl font-bold">
+                                98%
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">내담자 만족도</div>
+                                <div class="text-sm font-bold text-slate-800">"나다움을 되찾았어요"</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Text & Counselor Info -->
+                    <div class="space-y-6">
+                        <span class="text-brand-500 font-bold text-sm tracking-widest uppercase">Professional & Empathetic</span>
+                        <h2 class="serif-title text-3xl sm:text-4xl font-bold text-brand-900 leading-tight">
+                            검증된 전문가와 함께하는<br>따뜻하고 안전한 대화
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                            뉴트루의 상담진은 한국상담심리학회 및 보건복지부 인정 공인 자격을 보유한 전문 상담사로 구성되어 있습니다. 성급한 조언이나 판단 대신, 깊은 경청과 수용으로 당신의 마음에 동행합니다.
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-certificate text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-base">공인된 전문 자격 보유</h4>
+                                    <p class="text-xs text-slate-500">상담심리사 1/2급, 임상심리사 등 국가 및 주류 학회 자격 검증 완료</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-lock text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-base">철저한 비밀보장 원칙</h4>
+                                    <p class="text-xs text-slate-500">상담 윤리강령에 준거하여 모든 기록과 대화 내용은 100% 비밀이 유지됩니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center shrink-0 mt-1">
+                                    <i class="fa-solid fa-hand-holding-heart text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-base">비판 없는 편안한 공간</h4>
+                                    <p class="text-xs text-slate-500">어떤 이야기든 안심하고 꺼낼 수 있도록 온전한 이해와 수용을 제공합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 6. REVIEWS / CLIENT STORIES -->
+        <section id="reviews" class="py-20 bg-warmBg border-t border-brand-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-brand-500 font-bold text-sm tracking-widest uppercase">Client Reviews</span>
+                    <h2 class="serif-title text-3xl sm:text-4xl font-bold text-brand-900 mt-2">
+                        뉴트루와 함께한 청년들의 이야기
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-2">
+                        자신만의 가치를 찾아가고 있는 이들의 솔직한 후기입니다.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Review 1 -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-xs mb-4 gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed mb-6 font-medium">
+                                "남들의 기대에 맞춰 사느라 늘 지쳐있었어요. 뉴트루에서 검사 프로그램을 하면서 제가 진짜 원했던 삶의 모습이 뭔지 깨달았습니다. 마음의 무게가 훨씬 가벼워졌어요."
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs">
+                            <span class="font-bold text-slate-800">20대 취업준비생 K님</span>
+                            <span class="text-brand-600">자기이해 검사 이용</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-xs mb-4 gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed mb-6 font-medium">
+                                "상담사님의 차분한 경청 덕분에 오랫동안 말하지 못했던 불안을 편하게 털어놓았습니다. 나 자신을 자책하지 않고 인정하는 법을 배우고 있습니다."
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs">
+                            <span class="font-bold text-slate-800">30대 직장인 L님</span>
+                            <span class="text-brand-600">1:1 개인상담 10회기</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-xs mb-4 gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed mb-6 font-medium">
+                                "리플렉션 워크숍에서 비슷한 고민을 하는 청년들과 대화하며 나만 혼자가 아니라는 위로를 받았어요. 매일 일기 쓰는 습관도 생겼습니다!"
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs">
+                            <span class="font-bold text-slate-800">20대 대학생 M님</span>
+                            <span class="text-brand-600">테라피 워크숍 참여</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 7. BOTTOM CTA BANNER -->
+        <section class="py-16 bg-brand-500 text-white text-center relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-4 relative z-10 space-y-6">
+                <h2 class="serif-title text-3xl sm:text-4xl font-bold">
+                    진짜 나를 찾아가는 첫 걸음,<br>뉴트루가 함께하겠습니다.
+                </h2>
+                <p class="text-brand-100 text-sm sm:text-base max-w-xl mx-auto">
+                    망설이지 마세요. 안전하고 친절한 상담 심리 전문가가 당신의 이야기를 기다리고 있습니다.
+                </p>
+                <div>
+                    <button onclick="openBookingModal()" class="bg-white text-brand-900 hover:bg-brand-50 font-bold px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+                        지금 바로 상담 예약하기
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-slate-300 py-12 border-t border-brand-800 text-xs sm:text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-brand-800 pb-8">
+                <div>
+                    <div class="brand-font text-2xl font-bold text-white tracking-wider">NEW TRUE</div>
+                    <p class="text-brand-300 mt-1">청년 마음건강 · 자기이해 · 성장 중심 상담 센터</p>
+                </div>
+                <div class="flex gap-6 text-slate-400">
+                    <a href="#" class="hover:text-white transition">이용약관</a>
+                    <a href="#" class="hover:text-white transition font-bold text-white">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white transition">오시는 길</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-400">
+                <div class="space-y-1">
+                    <p>뉴트루 심리상담센터 | 대표자: 홍길동</p>
+                    <p>주소: 서울시 마포구 독막로 123, 4층 (상수역 2번 출구 도보 3분)</p>
+                    <p>사업자 등록번호: 000-00-00000</p>
+                </div>
+                <div class="space-y-1 md:text-right">
+                    <p>상담 예약 및 문의: 02-1234-5678</p>
+                    <p>이메일: contact@newtrue.co.kr</p>
+                    <p>운영시간: 월-토 10:00 ~ 21:00 (일요일/공휴일 휴무)</p>
+                </div>
+            </div>
+
+            <div class="text-center text-slate-500 pt-4 border-t border-brand-900/50">
+                © 2026 NEW TRUE Counseling Center. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- BOOKING / CONTACT MODAL -->
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="text-brand-500 font-bold text-xs uppercase">Reservation</span>
+                <h3 class="serif-title text-2xl font-bold text-slate-800 mt-1">상담 예약 신청</h3>
+                <p class="text-xs text-slate-500 mt-1">신청서를 남겨주시면 24시간 이내에 안내 연락을 드립니다.</p>
+            </div>
+
+            <!-- Booking Form -->
+            <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">성함 / 닉네임 *</label>
+                    <input type="text" required placeholder="예: 홍길동" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">연락처 *</label>
+                    <input type="tel" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">희망 프로그램 *</label>
+                    <select id="modalProgramSelect" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                        <option value="1:1 청년 맞춤 심리상담">1:1 청년 맞춤 심리상담</option>
+                        <option value="자기이해 종합 검사 패키지">자기이해 종합 검사 패키지</option>
+                        <option value="리플렉션 테라피 모임">리플렉션 테라피 워크숍</option>
+                        <option value="기타/상담 후 결정">기타 (상담 후 결정)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">주요 고민 분야 (선택)</label>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-brand-50">
+                            <input type="checkbox" class="accent-brand-500">
+                            <span>우울 / 불안 / 스트레스</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-brand-50">
+                            <input type="checkbox" class="accent-brand-500">
+                            <span>대인관계 / 자아존중감</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-brand-50">
+                            <input type="checkbox" class="accent-brand-500">
+                            <span>진로 / 번아웃</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-brand-50">
+                            <input type="checkbox" class="accent-brand-500">
+                            <span>자기탐색 / 성격분석</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">전하고 싶은 말씀 (선택)</label>
+                    <textarea rows="3" placeholder="편하게 간단한 마음 상태나 희망 일시를 적어주세요." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-xl shadow transition text-sm">
+                        상담 예약 신청하기
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-400 text-center">
+                    * 작성해주신 정보는 상담 안내 목적으로만 안전하게 사용됩니다.
+                </p>
+            </form>
+
+            <!-- Success State Message (Hidden by default) -->
+            <div id="bookingSuccess" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h4 class="text-xl font-bold text-slate-800">상담 예약 신청 완료!</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    신청이 정상적으로 접수되었습니다.<br>
+                    작성해주신 연락처로 담당 상담사가 빠른 시일 내에 연락을 드리겠습니다.
+                </p>
+                <button onclick="closeBookingModal()" class="mt-4 bg-brand-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold">
+                    확인
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 2. Program Tab Filtering
+        function filterPrograms(category) {
+            const cards = document.querySelectorAll('.program-card');
+            const tabs = document.querySelectorAll('.program-tab');
+
+            // Update Tab active styling
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-brand-500', 'text-white');
+                tab.classList.add('bg-white', 'text-slate-600');
+            });
+            
+            const activeTab = document.getElementById(`tab-${category}`);
+            if(activeTab) {
+                activeTab.classList.add('bg-brand-500', 'text-white');
+                activeTab.classList.remove('bg-white', 'text-slate-600');
+            }
+
+            // Filter Card display
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 3. Interactive Self-Check Quiz Logic
+        const questions = [
+            {
+                q: "요즘 나를 가장 힘들게 만드는 상황은 무엇인가요?",
+                options: [
+                    { text: "타인의 시선이나 기대에 부응하려니 숨이 막힌다", score: 'self' },
+                    { text: "무기력하고 내가 무엇을 원하는지 잘 모르겠다", score: 'mind' },
+                    { text: "관계에서의 갈등이나 감정 기복이 심하다", score: 'growth' }
+                ]
+            },
+            {
+                q: "나만의 시간을 가질 때 어떤 생각이 가장 자주 드나요?",
+                options: [
+                    { text: "남들에 비해 뒤처지는 것 같아 조급하다", score: 'self' },
+                    { text: "상처받기 싫어서 마음의 문을 닫게 된다", score: 'mind' },
+                    { text: "진짜 내 모습으로 살아가고 싶다", score: 'growth' }
+                ]
+            },
+            {
+                q: "뉴트루를 통해 얻고 싶은 가장 큰 변화는 무엇인가요?",
+                options: [
+                    { text: "진짜 나를 알고 중심을 잡는 자아 발견", score: 'self' },
+                    { text: "지친 마음의 휴식과 감정적인 안정", score: 'mind' },
+                    { text: "더 나은 삶을 향한 구체적인 실행력과 성장", score: 'growth' }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let scores = { self: 0, mind: 0, growth: 0 };
+
+        function renderQuestion() {
+            const box = document.getElementById('quiz-question-box');
+            const progress = document.getElementById('quiz-progress');
+            
+            progress.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+            const qData = questions[currentQuestion];
+            
+            box.innerHTML = `
+                <div>
+                    <span class="text-xs text-amber-400 font-bold block mb-2">QUESTION 0${currentQuestion + 1}</span>
+                    <h3 class="serif-title text-lg sm:text-xl font-semibold text-white mb-6">${qData.q}</h3>
+                </div>
+                <div class="space-y-3">
+                    ${qData.options.map((opt, i) => `
+                        <button onclick="answerQuestion('${opt.score}')" class="w-full text-left p-4 rounded-xl bg-brand-900/80 border border-brand-700/80 hover:bg-brand-700 hover:border-amber-400 transition text-xs sm:text-sm text-brand-100 flex items-center justify-between group">
+                            <span>${opt.text}</span>
+                            <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition text-amber-400"></i>
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function answerQuestion(type) {
+            scores[type]++;
+            currentQuestion++;
+
+            if(currentQuestion < questions.length) {
+                renderQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quiz-step-container').classList.add('hidden');
+            const resultBox = document.getElementById('quiz-result-box');
+            resultBox.classList.remove('hidden');
+
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+            const rec = document.getElementById('result-recommendation');
+
+            // Simple highest score check
+            if (scores.self >= scores.mind && scores.self >= scores.growth) {
+                title.innerText = "나다움을 탐색하는 '자기이해'가 필요한 상태";
+                desc.innerText = "남들의 기대에 맞추느라 내 안의 진짜 목소리를 잠시 잊으셨군요. 타인의 시선에서 자유로워져 나만의 가치관을 정립할 시간입니다.";
+                rec.innerText = "에니어그램 & 투사검사 기반 '자기이해 종합 검사 패키지'";
+            } else if (scores.mind >= scores.growth) {
+                title.innerText = "지친 마음을 보살피는 '돌봄'이 필요한 상태";
+                desc.innerText = "누적된 스트레스와 번아웃으로 마음의 에너지가 많이 소진되어 있습니다. 비판 없는 편안한 공간에서 따뜻한 위로와 휴식이 우선입니다.";
+                rec.innerText = "1:1 청년 맞춤 심리상담 (마음 안정 & 감정 조율)";
+            } else {
+                title.innerText = "새로운 도약을 준비하는 '성장'의 단계";
+                desc.innerText = "현재의 나를 넘어 새로운 나로 변화하고 싶은 열망이 큽니다. 지속 가능한 일상 습관과 실천적 행동을 통해 나답게 성장해나갈 수 있습니다.";
+                rec.innerText = "리플렉션 테라피 소모임 & 워크북 프로그램";
+            }
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            scores = { self: 0, mind: 0, growth: 0 };
+            document.getElementById('quiz-result-box').classList.add('hidden');
+            document.getElementById('quiz-step-container').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        // Initialize quiz on load
+        renderQuestion();
+
+
+        // 4. Booking Modal Functions
+        function openBookingModal(programName = null) {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.remove('hidden');
+            
+            if(programName) {
+                const select = document.getElementById('modalProgramSelect');
+                select.value = programName;
+            }
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.add('hidden');
+            // Reset form view
+            document.getElementById('bookingForm').classList.remove('hidden');
+            document.getElementById('bookingSuccess').classList.add('hidden');
+        }
+
+        function submitBooking(e) {
+            e.preventDefault();
+            // Simulate submission
+            document.getElementById('bookingForm').classList.add('hidden');
+            document.getElementById('bookingSuccess').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
