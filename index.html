@@ -664,20 +664,20 @@
             </div>
 
             <!-- Booking Form -->
-            <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+            <form id="bookingForm" action="https://formspree.io/f/mrpendva" method="POST" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">성함 / 닉네임 *</label>
-                    <input type="text" required placeholder="예: 홍길동" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                    <input type="text" name="name" required placeholder="예: 홍길동" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">연락처 *</label>
-                    <input type="tel" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                    <input type="tel" name="phone" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">희망 프로그램 *</label>
-                    <select id="modalProgramSelect" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                    <select id="modalProgramSelect" name="program" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
                         <option value="1:1 청년 맞춤 심리상담">1:1 청년 맞춤 심리상담</option>
                         <option value="자기이해 종합 검사 패키지">자기이해 종합 검사 패키지</option>
                         <option value="리플렉션 테라피 모임">리플렉션 테라피 워크숍</option>
@@ -709,7 +709,7 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">전하고 싶은 말씀 (선택)</label>
-                    <textarea rows="3" placeholder="편하게 간단한 마음 상태나 희망 일시를 적어주세요." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none"></textarea>
+                    <textarea name="message" rows="3" placeholder="편하게 간단한 마음 상태나 희망 일시를 적어주세요." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none"></textarea>
                 </div>
 
                 <div class="pt-2">
